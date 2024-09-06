@@ -51,11 +51,12 @@ void sigIntHandler(int sigNum)
 
 int main(int argc, char** argv)
 {
-    float frequency = 100.f, bandwidth = 200.f;
+    float frequency = 100.f, bandwidth = 200.f; // 預設為 200kHz 廣播 FM 頻寬
     uint16_t dmaChannel = 0;
     bool showUsage = true, loop = false;
     int opt, filesOffset;
 
+    // 增加 "-b" 選項來設置頻寬
     while ((opt = getopt(argc, argv, "rf:d:b:v")) != -1) {
         switch (opt) {
             case 'r':
@@ -68,7 +69,7 @@ int main(int argc, char** argv)
                 dmaChannel = std::stoi(optarg);
                 break;
             case 'b':
-                bandwidth = std::stof(optarg);
+                bandwidth = std::stof(optarg); // 使用命令行參數來設置頻寬
                 break;
             case 'v':
                 std::cout << EXECUTABLE << " version: " << VERSION << std::endl;
@@ -118,3 +119,4 @@ int main(int argc, char** argv)
 
     return result;
 }
+
